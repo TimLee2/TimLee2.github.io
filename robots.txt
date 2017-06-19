@@ -1,0 +1,7 @@
+# robots.txt file for TimLee2.github.io
+
+User-agent: Googlebot
+Disallow:
+
+User-agent: *
+Disallow: /
