@@ -1,10 +1,37 @@
+
 <h1>Test Web Page</h1>
-<h3>Last edited: 6/23/17</h3>
+<h3>Last edited: 6/24/17</h3>
+
+<!--
+<form method="POST" action="https://formspree.io/timothy.c.lee.96@gmail.com">
+    <input type="text" name="name" placeholder="Your name" required="">
+    <input type="email" name="_replyto" placeholder="Your email" required="">
+    <textarea name="message" placeholder="Your message" required=""></textarea>
+    <input type="text" name="_gotcha" style="display:none">
+    <input type="hidden" name="_format" value="plain" style="display:none">
+    <button type="submit">Send</button>
+</form>
+-->
+
+<h1>FORMSPREE METHOD:</h1>
+
+<form id="contactform" method="POST">
+    <input type="text" name="name" placeholder="Your name" required="">
+    <input type="email" name="_replyto" placeholder="Your email" required="">
+    <input type="hidden" name="_subject" value="New Message!" />
+    <textarea name="message" placeholder="Your message" required=""></textarea>
+    <input type="text" name="_gotcha" style="display:none" />
+    <input type="submit" value="Send">
+</form>
+<script>
+    var contactform =  document.getElementById('contactform');
+    contactform.setAttribute('action', '//formspree.io/' + 'timothy.c.lee' + '.96' + '@' + 'gmail' + '.' + 'com');
+</script>
+
+
 
 <h1>MAILTO METHODS:</h1>
-<!-- 
-     _______________MAIL-TO METHODS_________________
--->
+<!-- ---------------------MAILTO METHODS---------------------- -->
 
 <!-- Method #1 
      This method requires the user to edit the email address being sent. -->
@@ -48,3 +75,4 @@
         <em>Please enable Javascript to see the email address.<em>
     </noscript>
 </p>
+
