@@ -1,6 +1,7 @@
 <!--
 RiskScript
 Author: Tim Lee
+Last modified: 9/20/2018
 -->
 
 <!DOCTYPE html>
@@ -12,7 +13,7 @@ Author: Tim Lee
 </head>
 
 <body>
-    <h1 id="title">Risk (Game of Thrones) Generator</h1>
+    <h1 id="title">Risk (Game of Thrones) Territories Generator</h1>
     
     <!-- Divides page into two sections. -->
     <div style="width:100%;">
@@ -57,9 +58,9 @@ Author: Tim Lee
             
             <br>
             <h2 id="EssosDisplay"></h2>
-            <input id="withEssos" type="button" value="With Essos" disabled>
-            <input id="noEssos" type="button" value="Without Essos" disabled>
-            <input id="onlyEssos" type="button" value="Only Essos" disabled>
+            <input id="noEssos" type="button" value="Westeros Only" disabled>
+            <input id="withEssos" type="button" value="Westeros + Essos" disabled>
+            <input id="onlyEssos" type="button" value="Essos Only" disabled>
             
             
             <h3 id="displayGeneratePrompt"></h3>
@@ -86,7 +87,7 @@ Author: Tim Lee
     var essosDecide = 0;     //Flag for deciding which array to use
     
     function numPlayers(){
-    
+        
         // numPlaying stores the number of players entered.
         numPlaying = document.getElementById("numberPlayers").value;
         if(numPlaying == 1){
@@ -104,28 +105,28 @@ Author: Tim Lee
         else{
             document.getElementById("GenerationError1").innerHTML 
                     = numPlaying + " PLAYERS ENTERED.";
+            //document.getElementById("in1").disabled = false;
+            //document.getElementById("in2").disabled = false;
             document.getElementById("promptToEnterNames").innerHTML
-                    = "Now enter each player:";
-            document.getElementById("warning1").innerHTML
-                    = "(Don't worry if remaining slots are left blank.)";
-             document.getElementById("warning2").innerHTML
-                    = "(If required player is left blank, will be " +  
-                      "given default name.)";
+                    = "Enter name each player:";
+            //document.getElementById("warning1").innerHTML
+                    //= "(Don't worry if remaining slots are left blank.)";
+            document.getElementById("warning2").innerHTML
+                    = "(Empty fields will be given default name.)";
         }  
     }
     
     // jQuery for event handling
     $(document).ready(function(){
     
-        // Dynamically displays the Player Names input boxes
+        // Enables user to enter in names
         $("#numP").click(function(){
             if(numPlaying > 1 && numPlaying < 8){
                 var iterNames = 1;
                 while(iterNames <= numPlaying){
-                    $("#name"+iterNames).show();
+                    $("#name" + iterNames).show();
                     iterNames++;
                 }
-                
                 $("#enteredPlayers").show();
             }
         });
@@ -134,7 +135,7 @@ Author: Tim Lee
         $("#enteredPlayers").click(function(){
             var iterInputNames = 1;
             while(iterInputNames <= numPlaying){
-                strPlayers.push($("#in"+iterInputNames).val());
+                strPlayers.push($("#in" + iterInputNames).val());
                 iterInputNames++;
             }
             
@@ -150,10 +151,8 @@ Author: Tim Lee
                 }
                 counter++;
             }
-            
-            document.getElementById("EssosDisplay").innerHTML
-                    = "Select from 3 map types: ";
-            //Enables the map type buttons
+            document.getElementById("EssosDisplay").innerHTML = 
+                        "Select from 3 map types: ";
             document.getElementById("noEssos").disabled = false;
             document.getElementById("withEssos").disabled = false;
             document.getElementById("onlyEssos").disabled = false;
@@ -163,7 +162,7 @@ Author: Tim Lee
         $("#withEssos").click(function(){
             document.getElementById("allowGeneration").disabled = false;
             document.getElementById("EssosDisplay").innerHTML
-                    = "Selected: WITH ESSOS";
+                    = "Selected: WESTEROS + ESSOS";
             document.getElementById("displayGeneratePrompt").innerHTML
                     = "Click \"Generate Territories!\"";
             essosDecide = 1;
@@ -173,7 +172,7 @@ Author: Tim Lee
         $("#noEssos").click(function(){
             document.getElementById("allowGeneration").disabled = false;
             document.getElementById("EssosDisplay").innerHTML
-                    = "Selected: WITHOUT ESSOS";
+                    = "Selected: WESTEROS ONLY";
             document.getElementById("displayGeneratePrompt").innerHTML
                     = "Click \"Generate Territories!\"";
             essosDecide = 0;
@@ -182,7 +181,7 @@ Author: Tim Lee
         $("#onlyEssos").click(function(){
             document.getElementById("allowGeneration").disabled = false;
             document.getElementById("EssosDisplay").innerHTML
-                    = "Selected: ONLY ESSOS";
+                    = "Selected: ESSOS ONLY";
             document.getElementById("displayGeneratePrompt").innerHTML
                     = "Click \"Generate Territories!\"";
             essosDecide = 2;
@@ -200,6 +199,7 @@ Author: Tim Lee
             "Red Mountains", "Highgarden", "The Mander", "Blackwater Rush", 
             "Searoad Marshes", "Oldtown", "Three Towers", "The Arbor", "Casterly Rock",
             "Crakehall", "Silverhill", "Golden Tooth", "The Crag"];
+
     
     var withEssosArr = ["Winterfell", "Wolfswood", "Bear Island", "Stoney Shore",
             "Barrowlands", "Cape Kraken", "The Neck", "White Harbor", "Widow's Watch",
@@ -239,7 +239,7 @@ Author: Tim Lee
             // Fisher-Yates Shuffle Algorithm 
             var m1 = noEssosArr.length;
             var temp1, i;
-            while(m1){
+            while(m1) {
                 i = Math.floor(Math.random() * m1--);
                 temp1 = noEssosArr[m1];
                 noEssosArr[m1] = noEssosArr[i];
@@ -321,6 +321,7 @@ Author: Tim Lee
             
             outputData(genArray3);
         }
+        
     }
     
     //Used to display the output of all Players and their territories.
@@ -356,3 +357,4 @@ Author: Tim Lee
 
 </body>
 </html>
+
